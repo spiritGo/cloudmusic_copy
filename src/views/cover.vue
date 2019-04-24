@@ -2,7 +2,7 @@
   <div class="cover">
     <h3>音乐的力量</h3>
     <div class="footer">
-      <img src="../assets/t_actionbar_discover_selected.png" />
+      <img src="../assets/t_actionbar_discover_selected.png">
       <span>网易云音乐</span>
     </div>
   </div>
@@ -11,7 +11,7 @@
 export default {
   mounted() {
     setTimeout(() => {
-      location.assign("/index");
+      location.assign("#/index");
     }, 3000);
   }
 };

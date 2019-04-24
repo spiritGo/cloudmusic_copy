@@ -6,12 +6,12 @@
       <div class="mui-inner-wrap">
         <!-- 菜单容器 -->
         <aside class="mui-off-canvas-left">
-          <div class="mui-scroll-wrapper">
-            <div class="mui-scroll">
-              <!-- 菜单具体展示内容 -->
-              ...
-            </div>
-          </div>
+          <!-- <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">-->
+          <!-- 菜单具体展示内容 -->
+          <!-- </div>
+          </div>-->
+          <asidec></asidec>
         </aside>
 
         <!-- 主页面标题 -->
@@ -53,6 +53,7 @@
             </div>
           </div>
         </div>
+        <div class="mui-off-canvas-backdrop"></div>
       </div>
     </div>
   </div>
@@ -64,6 +65,7 @@ import my from "../views/my.vue";
 import discovery from "../views/discovery.vue";
 import friends from "../views/friends.vue";
 import videos from "../views/videos.vue";
+import asidec from "../views/asidec.vue";
 
 export default {
   mounted() {
@@ -112,7 +114,8 @@ export default {
     my,
     discovery,
     friends,
-    videos
+    videos,
+    asidec
   }
 };
 </script>
@@ -121,11 +124,27 @@ export default {
 <style scoped lang="scss">
 $a-default-color: #5a5757;
 $a-font-size: 14px;
+$bg-color: #ebebeb;
 
 #index {
+  .mui-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 998;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
   a {
     color: $a-default-color;
   }
+
+  aside.mui-off-canvas-left {
+    background: $bg-color;
+  }
+
   .nav {
     display: inline-flex;
     height: inherit;

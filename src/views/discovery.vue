@@ -264,9 +264,10 @@ $font-size: 12px;
         left: 0;
         height: 1px;
         content: "";
-        transform: scaleY(0.5);
+        // transform: scaleY(0.5);
         background-color: #c8c7cc;
         margin: 6px auto;
+        bottom: -12px;
       }
 
       p {
