@@ -27,7 +27,7 @@
 
     <!-- 创建的歌单 -->
     <div class="mui-table-view my-cell-view">
-      <div class="mui-table-view-cell mui-collapse">
+      <!-- <div class="mui-table-view-cell mui-collapse">
         <a class="mui-navigate-right" href="#">
           <span>创建的歌单</span>
           <p></p>
@@ -35,9 +35,36 @@
           <span class="mui-icon mui-icon-forward"></span>
         </a>
         <div class="mui-collapse-content">
-          <p>我喜欢的音乐</p>
+          <ul class="mui-table-view mui-table-view-chevron">
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right" href="#">PC方案</a>
+            </li>
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right" href="#">手机方案</a>
+            </li>
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right" href="#">TV方案</a>
+            </li>
+          </ul>
         </div>
-      </div>
+      </div>-->
+      <ul class="mui-table-view mui-table-view-chevron">
+        <li class="mui-table-view-cell mui-collapse">
+          <a class="mui-navigate-right" href="#">创建的歌单</a>
+          <ul class="mui-table-view mui-table-view-chevron item">
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right" href="#">我喜欢的音乐</a>
+            </li>
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right" href="#">我收藏的音乐</a>
+            </li>
+            <li class="mui-table-view-cell">
+              <a class="mui-navigate-right" href="#">喜欢我的音乐</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
       <!-- 截图导入歌单 -->
       <button type="button" class="mui-btn mui-btn-outlined">截图导入歌单</button>
     </div>
@@ -50,21 +77,23 @@ export default {};
 </script>
 <style lang="scss" scoped>
 $font-size: 12px;
+$font-14: 14px;
 
 #my {
   // 子导航栏
   .mui-scroll-wrapper {
     height: 80px;
-    border-bottom: 1px solid #ccc5;
+    // border-bottom: 1px solid #ccc5;
 
     .mui-scroll {
       height: auto;
       background-color: #fff;
       .my-fm {
-        padding-top: 5px;
+        padding-top: 10px;
         display: inline-flex;
         flex-direction: column;
         font-size: $font-size;
+
         img {
           width: 40px;
         }
@@ -76,6 +105,11 @@ $font-size: 12px;
   .mui-table-view {
     &:after {
       height: 0px;
+    }
+
+    &::before{
+      top: 0;
+      margin-top: 3px;
     }
 
     .mui-table-view-cell {
@@ -100,6 +134,7 @@ $font-size: 12px;
   .my-cell-view {
     padding-bottom: 17px;
     margin-top: 8px;
+    font-size: $font-14;
 
     &:before {
       height: 0px;
@@ -116,6 +151,12 @@ $font-size: 12px;
       padding-left: 15px;
       p {
         flex: 1;
+      }
+    }
+
+    .item li {
+      &:not(:last-child) {
+        border-bottom: 1px solid #eee;
       }
     }
 

@@ -189,6 +189,7 @@ $font-size: 12px;
     }
 
     ul {
+      margin-top: 3px;
       &::before {
         height: 0;
       }
@@ -292,19 +293,42 @@ $font-size: 12px;
     }
 
     ul {
+      background-color: #eee;
+      padding-right: 0;
+      padding-bottom: 0;
+
       &::before {
         height: 0;
       }
 
-      .mui-media-body {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      li {
+        padding: 6px 0;
+        margin: 0 0 6px;
+        background-color: #fff;
 
-        img {
-          width: 15px;
-          height: 15px;
-          vertical-align: middle;
+        &:last-child {
+          margin: 0;
+        }
+
+        a {
+          padding: 0 10px;
+          margin: 0;
+
+          img {
+            border-radius: 6px;
+          }
+
+          .mui-media-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img {
+              width: 15px;
+              height: 15px;
+              vertical-align: middle;
+            }
+          }
         }
       }
     }
