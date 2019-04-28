@@ -53,7 +53,28 @@
             </div>
           </div>
         </div>
+
         <div class="mui-off-canvas-backdrop"></div>
+
+        <div class="footer">
+          <div class="left">
+            <img src="../assets/shortcut_fm.png" alt>
+            <div class="info">
+              <h4>歌名</h4>
+              <p>描述</p>
+            </div>
+          </div>
+          <div class="right">
+            <img src="../assets/pause.png" alt>
+            <img class="menu" src="../assets/menu.png" alt>
+            <div class="menulist">
+              <div class="menulist-item" v-for="item in list" :key="item.id" :data-id="item.id">
+                <p v-text="item.title"></p>
+              </div>
+            </div>
+            <div class="mask"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -68,13 +89,25 @@ import videos from "../views/videos.vue";
 import asidec from "../views/asidec.vue";
 
 export default {
+  data() {
+    return {
+      list: [
+        { id: 1, title: "流行" },
+        { id: 2, title: "摇滚" },
+        { id: 3, title: "古风" },
+        { id: 4, title: "pop" },
+        { id: 5, title: "rap" },
+        { id: 6, title: "朋克" }
+      ]
+    };
+  },
   mounted() {
     mui.init();
     this.offsetToRight();
     this.initScroll();
     this.initPagePosition();
     this.scrollToTop();
-    // console.dir(mui(".mui-scroll-wrapper").scroll());
+    this.menu();
   },
   methods: {
     //100毫秒滚动到顶
@@ -106,7 +139,30 @@ export default {
         for (var item of items) item.className = "mui-control-item";
 
         $.scrollToTop();
-        console.log("object");
+        // console.log("object");
+      });
+    },
+
+    // 播放列表
+    menu() {
+      var mask = mui(".footer .mask")[0];
+      var menulist = document.querySelector(".footer .menulist");
+      var menulist_item = document.querySelector(
+        ".footer .menulist .menulist-item"
+      );
+      // console.log(mask);
+      mui(".footer").on("tap", ".menu", () => {
+        menulist.style.top = -250 + "px";
+        mask.style.display = "block";
+      });
+
+      mask.addEventListener("tap", () => {
+        mask.style.display = "none";
+        menulist.style.top = 50 + "px";
+      });
+
+      mui(".footer .menulist").on("tap", ".menulist-item", function() {
+        mui.trigger(mask, "tap");
       });
     }
   },
@@ -163,6 +219,109 @@ $bg-color: #ebebeb;
       // border-bottom: 1px solid #333;
       border-bottom: 1px solid #007aff;
       color: #007aff;
+    }
+  }
+
+  .mui-bar-nav ~ .mui-content {
+    padding-bottom: 50px;
+  }
+
+  .footer {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    bottom: 0;
+    z-index: 10;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -2px 6px #eee;
+
+    .left {
+      display: flex;
+      align-items: center;
+      img {
+        width: 40px;
+        height: 40px;
+        margin-left: 3px;
+        vertical-align: middle;
+      }
+
+      .info {
+        box-sizing: border-box;
+        margin-left: 6px;
+        h4 {
+          font-size: 15px;
+          margin-bottom: 2px;
+        }
+
+        p {
+          margin: 0;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .right {
+      padding-right: 10px;
+
+      img {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+
+      img:nth-child(2) {
+        transform: scale(0.8);
+      }
+
+      .menulist {
+        position: absolute;
+        width: 100%;
+        height: 300px;
+        // height: 0;
+        background-color: white;
+        // top: -250px;
+        top: 50px;
+        left: 0;
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+        // border: 1px solid #ccc;
+        z-index: 10;
+        // display: none;
+        transition: all 0.3s;
+
+        .menulist-item {
+          overflow: hidden;
+
+          // &:not(:last-child) {
+          //   // border-bottom: #eee solid 1px;
+          // }
+
+          &:hover {
+            background-color: #ccc;
+          }
+
+          p {
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 10px 0;
+          }
+        }
+      }
+
+      .mask {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: none;
+      }
     }
   }
 }

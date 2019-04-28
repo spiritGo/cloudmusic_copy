@@ -115,6 +115,7 @@
   </div>
 </template>
 <script>
+import { clearTimeout } from "timers";
 export default {
   mounted() {
     this.initSlider();
@@ -122,7 +123,7 @@ export default {
   methods: {
     // 初始化轮播图
     initSlider() {
-      mui("#dis-slider").slider({ interval: 2000 });
+      mui("#dis-slider").slider({ interval: 3000 });
     }
   }
 };

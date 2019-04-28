@@ -13,13 +13,18 @@
     </div>
 
     <!-- 本地音乐组 -->
-    <ul class="mui-table-view my-mui-table-view">
-      <li class="mui-table-view-cell mui-media" v-for="i in 5" :key="i">
+    <ul class="mui-table-view my-mui-table-view local">
+      <li
+        class="mui-table-view-cell mui-media"
+        v-for="item in localeList"
+        :key="item.id"
+        :data-id="item.id"
+      >
         <a href="javascript:;">
           <img class="mui-media-object mui-pull-left my-list-icon" src="@/assets/zz.png">
           <div class="mui-media-body my-list-content">
-            <span>下载管理</span>
-            <span>(0)</span>
+            <span>{{item.title}}</span>
+            <span>({{item.count}})</span>
           </div>
         </a>
       </li>
@@ -73,7 +78,46 @@
 
 <script>
 // @ is an alias to /src
-export default {};
+export default {
+  data() {
+    return {
+      localeList: [
+        { id: 1, title: "本地音乐", count: 20 },
+        { id: 2, title: "最近播放", count: 100 },
+        { id: 3, title: "下载管理", count: 0 },
+        { id: 4, title: "我的电台", count: 0 },
+        { id: 5, title: "我的收藏", count: "专题/歌手/视频/专栏" }
+      ]
+    };
+  },
+  methods: {
+    local() {
+      mui("#my .local").on("tap", "li", function() {
+        // console.dir(this.dataset.id);
+        switch (this.dataset.id) {
+          case "1":
+            console.log("本地音乐");
+            break;
+          case "2":
+            console.log("最近播放");
+            break;
+          case "3":
+            console.log("下载管理");
+            break;
+          case "4":
+            console.log("我的电台");
+            break;
+          case "5":
+            console.log("我的收藏");
+            break;
+        }
+      });
+    }
+  },
+  mounted() {
+    this.local();
+  }
+};
 </script>
 <style lang="scss" scoped>
 $font-size: 12px;
@@ -107,7 +151,7 @@ $font-14: 14px;
       height: 0px;
     }
 
-    &::before{
+    &::before {
       top: 0;
       margin-top: 3px;
     }
