@@ -60,7 +60,7 @@
           <div class="left">
             <img src="../assets/shortcut_fm.png" alt>
             <div class="info">
-              <h4>歌名</h4>
+              <h4>{{title}}</h4>
               <p>描述</p>
             </div>
           </div>
@@ -92,16 +92,19 @@ export default {
   data() {
     return {
       list: [
-        { id: 1, title: "流行" },
-        { id: 2, title: "摇滚" },
-        { id: 3, title: "古风" },
-        { id: 4, title: "pop" },
-        { id: 5, title: "rap" },
-        { id: 6, title: "朋克" }
-      ]
+        { id: 1, title: "HITA - 白头吟.mp3" },
+        { id: 2, title: "HITA,小曲儿 - 丹青客.mp3" },
+        { id: 3, title: "KBShinya,哦漏,萧忆情Alex - 青衫薄.mp3" },
+        { id: 4, title: "不才 - 涉川.mp3" },
+        { id: 5, title: "不才,情桑 - 捕梦.mp3" },
+        { id: 6, title: "黄诗扶 - 九万字.mp3" }
+      ],
+      audio: null,
+      title: ""
     };
   },
   mounted() {
+    this.title = this.list[0].title;
     mui.init();
     this.offsetToRight();
     this.initScroll();
@@ -145,6 +148,7 @@ export default {
 
     // 播放列表
     menu() {
+      var $ = this;
       var mask = mui(".footer .mask")[0];
       var menulist = document.querySelector(".footer .menulist");
       var menulist_item = document.querySelector(
@@ -162,8 +166,21 @@ export default {
       });
 
       mui(".footer .menulist").on("tap", ".menulist-item", function() {
+        var id = this.dataset.id;
+        var title = $.list[id - 1].title;
+        $.title = title;
         mui.trigger(mask, "tap");
+        $.playMusic(title);
       });
+    },
+
+    playMusic(title) {
+      if (!this.audio) {
+        this.audio = document.createElement("audio");
+      }
+      document.body.appendChild(this.audio);
+      this.audio.src = "http://127.0.0.1:3002/music/" + title;
+      this.audio.play();
     }
   },
   components: {
@@ -242,6 +259,7 @@ $bg-color: #ebebeb;
     .left {
       display: flex;
       align-items: center;
+      width: 70%;
       img {
         width: 40px;
         height: 40px;
@@ -255,6 +273,10 @@ $bg-color: #ebebeb;
         h4 {
           font-size: 15px;
           margin-bottom: 2px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 185px;
         }
 
         p {
@@ -266,7 +288,6 @@ $bg-color: #ebebeb;
 
     .right {
       padding-right: 10px;
-
       img {
         width: 30px;
         height: 30px;
