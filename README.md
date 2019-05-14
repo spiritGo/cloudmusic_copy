@@ -15,15 +15,17 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+> 仅提供主要页面
+## 首页
+![index](readme/index.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 发现页
+![discovery](readme/discovery.png)
+
+## 朋友
+![friends](readme/friends.png)
+
+## 视频
+![video](readme/video.png)
+
